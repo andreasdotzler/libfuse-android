@@ -6,7 +6,7 @@
   See the file COPYING.
 */
 /* This program does the mounting and unmounting of FUSE filesystems */
-
+#if 0
 #define _GNU_SOURCE /* for clone */
 #include <config.h>
 
@@ -1296,4 +1296,8 @@ int main(int argc, char *argv[])
 		exit(1);
 
 	return 0;
+}
+#endif
+int main(){
+    return 0;
 }
