@@ -29,6 +29,7 @@
 #include <sys/utsname.h>
 #include <sched.h>
 #include <paths.h>
+#include <mntent.h>
 
 #define FUSE_COMMFD_ENV		"_FUSE_COMMFD"
 
