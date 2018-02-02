@@ -178,7 +178,7 @@ static int subdir_opendir(const char *path, struct fuse_file_info *fi)
 }
 
 static int subdir_readdir(const char *path, void *buf,
-			  fuse_fill_dir_t filler, off_t offset,
+			  fuse_fill_dir_t filler, int64_t offset,
 			  struct fuse_file_info *fi)
 {
 	struct subdir *d = subdir_get();
@@ -322,7 +322,7 @@ static int subdir_chown(const char *path, uid_t uid, gid_t gid)
 	return err;
 }
 
-static int subdir_truncate(const char *path, off_t size)
+static int subdir_truncate(const char *path, int64_t size)
 {
 	struct subdir *d = subdir_get();
 	char *newpath;
@@ -334,7 +334,7 @@ static int subdir_truncate(const char *path, off_t size)
 	return err;
 }
 
-static int subdir_ftruncate(const char *path, off_t size,
+static int subdir_ftruncate(const char *path, int64_t size,
 			    struct fuse_file_info *fi)
 {
 	struct subdir *d = subdir_get();
@@ -384,7 +384,7 @@ static int subdir_open(const char *path, struct fuse_file_info *fi)
 	return err;
 }
 
-static int subdir_read(const char *path, char *buf, size_t size, off_t offset,
+static int subdir_read(const char *path, char *buf, size_t size, int64_t offset,
 		       struct fuse_file_info *fi)
 {
 	struct subdir *d = subdir_get();
@@ -398,7 +398,7 @@ static int subdir_read(const char *path, char *buf, size_t size, off_t offset,
 }
 
 static int subdir_write(const char *path, const char *buf, size_t size,
-			off_t offset, struct fuse_file_info *fi)
+			int64_t offset, struct fuse_file_info *fi)
 {
 	struct subdir *d = subdir_get();
 	char *newpath;

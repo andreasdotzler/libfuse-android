@@ -32,7 +32,7 @@ const char *usage =
 "  w SIZE [OFF] : write SIZE bytes @ OFF (dfl 0) from stdin\n"
 "\n";
 
-static int do_rw(int fd, int is_read, size_t size, off_t offset,
+static int do_rw(int fd, int is_read, size_t size, int64_t offset,
 		 size_t *prev_size, size_t *new_size)
 {
 	struct fioc_rw_arg arg = { .offset = offset };

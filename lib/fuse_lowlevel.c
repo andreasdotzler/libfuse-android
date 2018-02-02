@@ -194,7 +194,7 @@ size_t fuse_dirent_size(size_t namelen)
 }
 
 char *fuse_add_dirent(char *buf, const char *name, const struct stat *stbuf,
-		      off_t off)
+		      int64_t off)
 {
 	unsigned namelen = strlen(name);
 	unsigned entlen = FUSE_NAME_OFFSET + namelen;
@@ -214,7 +214,7 @@ char *fuse_add_dirent(char *buf, const char *name, const struct stat *stbuf,
 }
 
 size_t fuse_add_direntry(fuse_req_t req, char *buf, size_t bufsize,
-			 const char *name, const struct stat *stbuf, off_t off)
+			 const char *name, const struct stat *stbuf, int64_t off)
 {
 	size_t entsize;
 
@@ -1306,7 +1306,7 @@ int fuse_lowlevel_notify_poll(struct fuse_pollhandle *ph)
 }
 
 int fuse_lowlevel_notify_inval_inode(struct fuse_chan *ch, fuse_ino_t ino,
-                                     off_t off, off_t len)
+                                     int64_t off, int64_t len)
 {
 	struct fuse_notify_inval_inode_out outarg;
 	struct fuse_ll *f;

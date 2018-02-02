@@ -67,7 +67,7 @@ static void cusexmp_open(fuse_req_t req, struct fuse_file_info *fi)
 	fuse_reply_open(req, fi);
 }
 
-static void cusexmp_read(fuse_req_t req, size_t size, off_t off,
+static void cusexmp_read(fuse_req_t req, size_t size, int64_t off,
 			 struct fuse_file_info *fi)
 {
 	(void)fi;
@@ -81,7 +81,7 @@ static void cusexmp_read(fuse_req_t req, size_t size, off_t off,
 }
 
 static void cusexmp_write(fuse_req_t req, const char *buf, size_t size,
-			  off_t off, struct fuse_file_info *fi)
+			  int64_t off, struct fuse_file_info *fi)
 {
 	(void)fi;
 

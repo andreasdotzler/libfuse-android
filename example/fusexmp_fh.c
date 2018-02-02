@@ -81,7 +81,7 @@ static int xmp_readlink(const char *path, char *buf, size_t size)
 struct xmp_dirp {
 	DIR *dp;
 	struct dirent *entry;
-	off_t offset;
+	int64_t offset;
 };
 
 static int xmp_opendir(const char *path, struct fuse_file_info *fi)
@@ -110,7 +110,7 @@ static inline struct xmp_dirp *get_dirp(struct fuse_file_info *fi)
 }
 
 static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
-		       off_t offset, struct fuse_file_info *fi)
+		       int64_t offset, struct fuse_file_info *fi)
 {
 	struct xmp_dirp *d = get_dirp(fi);
 
@@ -126,7 +126,7 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 	}
 	while (1) {
 		struct stat st;
-		off_t nextoff;
+		int64_t nextoff;
 
 		if (!d->entry) {
 			d->entry = readdir(d->dp);
@@ -263,7 +263,7 @@ static int xmp_chown(const char *path, uid_t uid, gid_t gid)
 	return 0;
 }
 
-static int xmp_truncate(const char *path, off_t size)
+static int xmp_truncate(const char *path, int64_t size)
 {
 	int res;
 
@@ -274,7 +274,7 @@ static int xmp_truncate(const char *path, off_t size)
 	return 0;
 }
 
-static int xmp_ftruncate(const char *path, off_t size,
+static int xmp_ftruncate(const char *path, int64_t size,
 			 struct fuse_file_info *fi)
 {
 	int res;
@@ -329,7 +329,7 @@ static int xmp_open(const char *path, struct fuse_file_info *fi)
 	return 0;
 }
 
-static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
+static int xmp_read(const char *path, char *buf, size_t size, int64_t offset,
 		    struct fuse_file_info *fi)
 {
 	int res;
@@ -343,7 +343,7 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 }
 
 static int xmp_write(const char *path, const char *buf, size_t size,
-		     off_t offset, struct fuse_file_info *fi)
+		     int64_t offset, struct fuse_file_info *fi)
 {
 	int res;
 
